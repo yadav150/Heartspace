@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A clean, responsive space for sharing breakup and heartache stories anonymously." />
+  <title>Heartspace — Share Your Story</title>
+  <style>
+    :root {
+      --bg: #0f1115;
+      --panel: rgba(255, 255, 255, 0.06);
+      --panel-2: rgba(255, 255, 255, 0.09);
+      --text: #f5f7fb;
+      --muted: rgba(245, 247, 251, 0.72);
+      --line: rgba(255, 255, 255, 0.12);
+      --accent: #ff6b8b;
+      --accent-2: #7c5cff;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(255, 107, 139, 0.14), transparent 30%),
+        radial-gradient(circle at top right, rgba(124, 92, 255, 0.14), transparent 28%),
+        linear-gradient(180deg, #0b0d12 0%, #0f1115 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(15, 17, 21, 0.62);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 76px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      font-size: 1.05rem;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 10px 25px rgba(255, 107, 139, 0.28);
+      font-size: 1.1rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      box-shadow: 0 16px 32px rgba(124, 92, 255, 0.24);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--line);
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 72px 0 36px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.5rem, 5vw, 4.8rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      max-width: 10ch;
+    }
+
+    .hero p {
+      margin: 18px 0 0;
+      max-width: 60ch;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .stat {
+      padding: 16px;
+      border-radius: 18px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .hero-card {
+      position: relative;
+      padding: 22px;
+      border-radius: calc(var(--radius) + 6px);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.05));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -40px -40px auto;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(255, 107, 139, 0.22), transparent 65%);
+      pointer-events: none;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .story-preview {
+      display: grid;
+      gap: 14px;
+    }
+
+    .preview-item {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--line);
+    }
+
+    .preview-item h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+
+    .preview-item p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .section {
+      padding: 28px 0 8px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      letter-spacing: -0.03em;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 52ch;
+      line-height: 1.6;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .feature,
+    .story-card,
+    .cta-card {
+      border-radius: var(--radius);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+    }
+
+    .feature {
+      padding: 22px;
+    }
+
+    .feature .icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(255, 107, 139, 0.18), rgba(124, 92, 255, 0.18));
+      border: 1px solid var(--line);
+      margin-bottom: 16px;
+      font-size: 1.15rem;
+    }
+
+    .feature h3,
+    .story-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.08rem;
+    }
+
+    .feature p,
+    .story-card p,
+    .cta-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .stories {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .story-card {
+      padding: 22px;
+    }
+
+    .story-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .tag {
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--line);
+    }
+
+    .cta {
+      padding: 36px 0 80px;
+    }
+
+    .cta-card {
+      padding: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .cta-card h2 {
+      margin: 0 0 10px;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+    }
+
+    footer {
+      padding: 18px 0 34px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding-top: 18px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    @media (max-width: 920px) {
+      .hero-grid,
+      .grid-3,
+      .stories,
+      .cta-card {
+        grid-template-columns: 1fr;
+        display: grid;
+      }
+
+      .hero-card {
+        order: -1;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .section-head,
+      .cta-card {
+        align-items: start;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding-top: 42px;
+      }
+
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-inner {
+        min-height: 70px;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .nav-actions {
+        width: 100%;
+      }
+
+      .nav-actions .btn {
+        flex: 1;
+      }
+
+      .section-head,
+      .footer-inner {
+        flex-direction: column;
+        align-items: start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="#home" class="brand" aria-label="Heartspace home">
+        <span class="brand-mark">❤</span>
+        <span>Heartspace</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#features">Features</a>
+        <a href="#stories">Stories</a>
+        <a href="#share">Share</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#stories" class="btn btn-ghost">Explore stories</a>
+        <a href="#share" class="btn btn-primary">Write your story</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">A safe space for heartbreak stories</div>
+          <h1>Share the pain. Feel understood.</h1>
+          <p>
+            Heartspace is a calm, modern place where people can write about love, breakup,
+            loss, healing, and the memories they carry. Real stories. Real emotions. No judgment.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#share" class="btn btn-primary">Start writing</a>
+            <a href="#features" class="btn btn-ghost">See how it works</a>
+          </div>
+
+          <div class="hero-stats" aria-label="Platform highlights">
+            <div class="stat">
+              <strong>Anonymous</strong>
+              <span>Tell your story safely</span>
+            </div>
+            <div class="stat">
+              <strong>Responsive</strong>
+              <span>Looks great on all screens</span>
+            </div>
+            <div class="stat">
+              <strong>Simple</strong>
+              <span>Easy to use and clean</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Featured story preview">
+          <div class="card-top">
+            <span class="pill">Featured story</span>
+            <span class="pill">2 min read</span>
+          </div>
+
+          <div class="story-preview">
+            <article class="preview-item">
+              <h3>“I still check my phone like they will text back.”</h3>
+              <p>
+                Some goodbyes do not end in one day. They stay in the silence, in the habits,
+                and in the heart that keeps hoping.
+              </p>
+            </article>
+
+            <article class="preview-item">
+              <h3>“We were perfect until life pulled us apart.”</h3>
+              <p>
+                A space for stories that were once full of love, now full of questions,
+                healing, and strength.
+              </p>
+            </article>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Built for emotional storytelling</h2>
+            <p>
+              A polished home page that can later be connected to signup, posting, likes,
+              comments, and anonymous publishing.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="feature">
+            <div class="icon">✍</div>
+            <h3>Write freely</h3>
+            <p>Give users a calm space to express breakup pain, healing, and lessons learned.</p>
+          </div>
+          <div class="feature">
+            <div class="icon">🔒</div>
+            <h3>Private by design</h3>
+            <p>Keep the platform simple now and connect secure accounts later with backend tools.</p>
+          </div>
+          <div class="feature">
+            <div class="icon">💬</div>
+            <h3>Connect with others</h3>
+            <p>Let readers feel less alone by reading stories that reflect their own heartache.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="stories">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Recent stories</h2>
+            <p>Sample story cards you can later connect to your database.</p>
+          </div>
+        </div>
+
+        <div class="stories">
+          <article class="story-card">
+            <h3>When love ended quietly</h3>
+            <p>
+              We did not fight. We just slowly became strangers. That silence hurt more than any
+              argument ever could.
+            </p>
+            <div class="story-meta">
+              <span class="tag">Breakup</span>
+              <span class="tag">Healing</span>
+              <span>• 4 min read</span>
+            </div>
+          </article>
+
+          <article class="story-card">
+            <h3>Still learning how to move on</h3>
+            <p>
+              Some days feel normal, and some days the memories come back all at once. Healing is
+              not a straight path.
+            </p>
+            <div class="story-meta">
+              <span class="tag">Heartbreak</span>
+              <span class="tag">Memory</span>
+              <span>• 3 min read</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="share">
+      <div class="container">
+        <div class="cta-card">
+          <div>
+            <h2>Ready to turn pain into a shared space?</h2>
+            <p>Use this page as the first step. Later you can add signup, posting, and a story feed.</p>
+          </div>
+          <a href="#home" class="btn btn-primary">Get started</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© 2026 Heartspace. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="#features">Features</a>
+        <a href="#stories">Stories</a>
+        <a href="#share">Share</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
