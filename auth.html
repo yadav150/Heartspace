@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Heartspace — Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">❤</span>
+        <span>Heartspace</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="write.html">Write Story</a>
+        <a href="index.html#stories">Stories</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="auth">
+      <div class="container">
+        <div class="story-card" id="userBox" style="display:none;">
+          <h3>Welcome 👤</h3>
+          <p id="userEmail"></p>
+          <button class="btn btn-primary" id="logoutBtn">Logout</button>
+        </div>
+
+        <h2>Account</h2>
+
+        <div class="story-card">
+          <h3>Sign Up</h3>
+          <input type="email" id="signupEmail" placeholder="Email" />
+          <input type="password" id="signupPassword" placeholder="Password" />
+          <button class="btn btn-primary" id="signupBtn">Sign Up</button>
+        </div>
+
+        <br />
+
+        <div class="story-card">
+          <h3>Login</h3>
+          <input type="email" id="loginEmail" placeholder="Email" />
+          <input type="password" id="loginPassword" placeholder="Password" />
+          <button class="btn btn-primary" id="loginBtn">Login</button>
+        </div>
+
+        <br />
+
+        <div class="story-card">
+          <h3>Or continue with Google</h3>
+          <button class="btn btn-primary" id="googleLoginBtn">Continue with Google</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDRcgEc428zLbEDVP8LmN7DPubfwTFhN9U",
+      authDomain: "heartspace-app.firebaseapp.com",
+      projectId: "heartspace-app",
+      storageBucket: "heartspace-app.firebasestorage.app",
+      messagingSenderId: "706297788927",
+      appId: "1:706297788927:web:625d0e4834517c7ad70fca"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>
