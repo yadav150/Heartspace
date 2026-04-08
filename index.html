@@ -16,15 +16,16 @@
       </a>
 
       <nav class="nav-links" aria-label="Main navigation">
-        <a href="#features">Features</a>
-        <a href="#stories">Stories</a>
-        <a href="#share">Share</a>
-      </nav>
+  <a href="index.html">Home</a>
+  <a href="auth.html">Login / Signup</a>
+  <a href="index.html#stories">Stories</a>
+  <a href="write.html">Write Story</a>
+</nav>
 
-      <div class="nav-actions">
-        <a href="#stories" class="btn btn-ghost">Explore stories</a>
-        <a href="#share" class="btn btn-primary" id="writeBtn">Write your story</a>
-      </div>
+<div class="nav-actions">
+  <a href="index.html#stories" class="btn btn-ghost">Explore stories</a>
+  <a href="write.html" class="btn btn-primary">Write your story</a>
+</div>
     </div>
   </header>
 
@@ -113,80 +114,7 @@
         </div>
       </div>
     </section>
-
-    <section class="section" id="auth">
-      <div class="container">
-
-        <div class="story-card" id="userBox" style="display:none;">
-          <h3>Welcome 👤</h3>
-          <p id="userEmail"></p>
-          <button class="btn btn-primary" id="logoutBtn">Logout</button>
-        </div>
-
-        <h2>Account</h2>
-
-        <!-- Signup -->
-        <div class="story-card">
-          <h3>Sign Up</h3>
-          <input type="email" id="signupEmail" placeholder="Email" />
-          <input type="password" id="signupPassword" placeholder="Password" />
-          <button class="btn btn-primary" id="signupBtn">Sign Up</button>
-        </div>
-
-        <br />
-
-        <!-- Login -->
-        <div class="story-card">
-          <h3>Login</h3>
-          <input type="email" id="loginEmail" placeholder="Email" />
-          <input type="password" id="loginPassword" placeholder="Password" />
-          <button class="btn btn-primary" id="loginBtn">Login</button>
-        </div>
-
-        <br />
-
-        <!-- Google Login -->
-        <div class="story-card">
-          <h3>Or continue with Google</h3>
-          <button class="btn btn-primary" id="googleLoginBtn">
-            Continue with Google
-          </button>
-        </div>
-
-      </div>
-    </section>
-
-    <section class="section" id="write">
-  <div class="container">
-    <h2>Write Your Story ✍️</h2>
-
-    <div class="story-card">
-
-      <!-- Title input -->
-      <input type="text" id="storyTitle" placeholder="Story Title" />
-
-      <!-- Toolbar (basic formatting buttons) -->
-      <div style="margin:10px 0;">
-        <button type="button" onclick="formatText('bold')"><b>B</b></button>
-        <button type="button" onclick="formatText('italic')"><i>I</i></button>
-        <button type="button" onclick="formatText('underline')"><u>U</u></button>
-      </div>
-
-      <!-- Editable content area -->
-      <!-- contenteditable allows rich text editing -->
-      <div id="storyEditor" contenteditable="true"
-           style="border:1px solid #ccc; padding:10px; min-height:150px; border-radius:6px;">
-      </div>
-
-      <!-- Publish button -->
-      <button class="btn btn-primary" id="postStoryBtn" style="margin-top:10px;">
-        Publish Story
-      </button>
-
-    </div>
-  </div>
-</section>
-
+    
   </main>
 
   <footer>
