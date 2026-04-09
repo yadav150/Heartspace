@@ -6,6 +6,7 @@
   <title>Heartspace — Login</title>
   <link rel="stylesheet" href="style.css">
 
+  <!-- Inline CSS (abhi ke liye wahi rehne denge, baad me remove karna) -->
   <style>
     .auth-container {
       display: flex;
@@ -18,40 +19,44 @@
     .auth-card {
       width: 100%;
       max-width: 420px;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+      padding: 28px;
+      border-radius: 14px;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.1);
       background: #fff;
     }
 
     .auth-card h2 {
-      margin-bottom: 15px;
+      margin-bottom: 16px;
       text-align: center;
+      color: #0f1115;
+      font-weight: 600;
     }
 
     .auth-card input {
       width: 100%;
-      padding: 12px;
+      padding: 12px 14px;
       margin: 8px 0;
-      border-radius: 8px;
+      border-radius: 9px;
       border: 1px solid #ddd;
       outline: none;
-      font-size: 14px;
+      font-size: 15px;
     }
 
     .auth-card input:focus {
       border-color: #ff5a7a;
+      box-shadow: 0 0 0 3px rgba(255, 90, 122, 0.12);
     }
 
     .auth-btn {
       width: 100%;
-      margin-top: 10px;
+      margin-top: 12px;
+      padding: 10px 14px;
     }
 
     .auth-links {
       display: flex;
       justify-content: space-between;
-      margin-top: 10px;
+      margin-top: 12px;
       font-size: 13px;
     }
 
@@ -61,9 +66,14 @@
       text-decoration: none;
     }
 
+    .auth-links a:hover {
+      color: #e91e63;
+      text-decoration: underline;
+    }
+
     .divider {
       text-align: center;
-      margin: 15px 0;
+      margin: 20px 0 16px;
       position: relative;
     }
 
@@ -84,12 +94,12 @@
       background: #fff;
       padding: 0 10px;
       font-size: 12px;
-      color: #888;
+      color: #666;
     }
 
     @media (max-width: 500px) {
       .auth-card {
-        padding: 20px;
+        padding: 22px 20px;
       }
     }
   </style>
@@ -116,14 +126,14 @@
 <main class="auth-container">
   <div class="auth-card">
 
-    <div id="authMessage" class="auth-message" style="color: red; font-size: 13px; margin: 8px 0; display: none;"></div>
+    <div id="authMessage" class="auth-message" style="color: #e91e63; font-size: 13px; margin: 6px 0; display: none;"></div>
 
-    <h2>Welcome Back</h2>
+    <h2>Welcome back</h2>
 
     <!-- Signup -->
     <input type="email" id="signupEmail" placeholder="Enter email">
     <input type="password" id="signupPassword" placeholder="Create password">
-    <button class="btn btn-primary auth-btn" id="signupBtn">Sign Up</button>
+    <button class="btn btn-primary auth-btn" id="signupBtn">Sign up</button>
 
     <div class="divider"><span>OR</span></div>
 
@@ -135,7 +145,7 @@
       <a id="forgotPassword">Forgot password?</a>
     </div>
 
-    <button class="btn btn-primary auth-btn" id="loginBtn">Login</button>
+    <button class="btn btn-primary auth-btn" id="loginBtn">Log in</button>
 
     <div class="divider"><span>OR</span></div>
 
